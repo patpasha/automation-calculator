@@ -114,8 +114,8 @@ const translations = {
         
         // Results
         resultTitle: "Result",
-        recommendedTitle: " Automation is recommended! ",
-        notRecommendedTitle: " Automation might not be the best option",
+        recommendedTitle: "✨ Automation is recommended! ✨",
+        notRecommendedTitle: "⚠️ Automation might not be the best option",
         dailySavingsLabel: "Daily savings:",
         automationTimeResultLabel: "Automation time:",
         breakEvenLabel: "Break-even point:",
@@ -231,10 +231,10 @@ function calculate() {
 
     if (daysToBreakEven < 365) {
         resultText.innerHTML = `
-            <div class="p-4 bg-green-50 border border-green-200 rounded-lg mb-4">
-                <span class="text-green-600 font-bold text-xl">${t.recommendedTitle}</span>
+            <div class="p-2 bg-green-50 border border-green-200 rounded-lg mb-2">
+                <span class="text-green-600 font-bold text-base">${t.recommendedTitle}</span>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-2">
                 <p><span class="font-medium">${t.dailySavingsLabel}</span> ${formattedDailySavings} ${t.minutesUnit} ${t.perDay}</p>
                 <p><span class="font-medium">${t.automationTimeResultLabel}</span> ${formattedAutomationTime} ${t.minutesUnit} (${automationTime} ${t.hoursUnit})</p>
                 <p><span class="font-medium">${t.breakEvenLabel}</span> <span class="font-bold">${daysToBreakEven} ${t.daysUnit}</span></p>
@@ -243,14 +243,14 @@ function calculate() {
         `;
     } else {
         resultText.innerHTML = `
-            <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-4">
-                <span class="text-yellow-600 font-bold text-xl">${t.notRecommendedTitle}</span>
+            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded-lg mb-2">
+                <span class="text-yellow-600 font-bold text-base">${t.notRecommendedTitle}</span>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-2">
                 <p><span class="font-medium">${t.breakEvenLabel}</span> <span class="font-bold">${daysToBreakEven} ${t.daysUnit}</span> ${t.moreThanYear}</p>
                 <p><span class="font-medium">${t.dailySavingsLabel}</span> ${formattedDailySavings} ${t.minutesUnit} ${t.perDay}</p>
                 <p><span class="font-medium">${t.automationTimeResultLabel}</span> ${formattedAutomationTime} ${t.minutesUnit} (${automationTime} ${t.hoursUnit})</p>
-                <p class="text-gray-600">${t.considerOtherOptions}</p>
+                <p class="text-gray-600 text-xs">${t.considerOtherOptions}</p>
             </div>
         `;
     }
@@ -263,7 +263,7 @@ function calculate() {
     const formattedDate = breakEvenDateObj.toLocaleDateString(currentLanguage === 'fr' ? 'fr-FR' : 'en-US', options);
     
     breakEvenDate.innerHTML = `
-        <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+        <div class="p-2 bg-indigo-50 border border-indigo-200 rounded-lg">
             <span class="font-medium">${t.breakEvenDateLabel}</span> ${formattedDate}
         </div>
     `;
