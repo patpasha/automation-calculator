@@ -1,0 +1,25 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Environnements de développement
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dépendances
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Fichiers de build
+dist/
+build/
+
+# Fichiers de configuration locaux
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur d'Automatisation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        zen: {
+                            bg: '#f5f5f7',
+                            primary: '#6366f1',
+                            secondary: '#8b5cf6',
+                            accent: '#ec4899',
+                            dark: '#1e293b',
+                        }
+                    },
+                    animation: {
+                        'gradient': 'gradient 8s ease infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            background-color: #f5f5f7;
+            color: #1e293b;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 200%;
+            animation: gradient 8s ease infinite;
+        }
+        .gradient-border {
+            position: relative;
+            border-radius: 16px;
+            background: white;
+        }
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            z-index: -1;
+            opacity: 0.7;
+        }
+        .zen-input {
+            background-color: #f5f5f7;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+        .zen-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+        .zen-button {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background-size: 200% 200%;
+            animation: gradient 8s ease infinite;
+            transition: all 0.3s;
+        }
+        .zen-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="py-6 px-4 md:px-8">
+            <div class="container mx-auto">
+                <h1 class="text-3xl md:text-4xl font-bold text-center gradient-text">
+                    Calculateur d'Automatisation
+                </h1>
+                <p class="text-center mt-4 text-gray-600 max-w-2xl mx-auto">
+                    Découvrez si l'automatisation d'une tâche répétitive est rentable pour vous.
+                </p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <div class="max-w-2xl mx-auto gradient-border shadow-lg p-8">
+                <div class="space-y-8">
+                    <div class="space-y-4">
+                        <label class="block text-lg font-medium text-zen-dark">Temps par tâche manuelle</label>
+                        <p class="text-sm text-gray-500">Le temps moyen nécessaire pour effectuer la tâche une seule fois :</p>
+                        <ul class="list-disc list-inside text-sm text-gray-500 pl-4 space-y-1">
+                            <li>Inclure la préparation nécessaire</li>
+                            <li>Inclure la saisie des données</li>
+                            <li>Inclure les vérifications</li>
+                            <li>Inclure les corrections éventuelles</li>
+                        </ul>
+                        <div class="flex items-center">
+                            <input type="number" 
+                                id="taskTime" 
+                                class="zen-input flex-grow rounded-lg p-3 focus:outline-none" 
+                                placeholder="Ex: 5"
+                                title="Temps total pour effectuer la tâche une fois, incluant préparation et vérification">
+                            <span class="ml-3 text-gray-500">minutes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <label class="block text-lg font-medium text-zen-dark">Fréquence d'exécution</label>
+                        <p class="text-sm text-gray-500">À quelle fréquence effectuez-vous cette tâche ?</p>
+                        <ul class="list-disc list-inside text-sm text-gray-500 pl-4 space-y-1">
+                            <li>Nombre moyen d'exécutions par jour</li>
+                            <li>Pour une tâche hebdomadaire : divisez par 5 (jours ouvrés)</li>
+                            <li>Pour une tâche mensuelle : divisez par 20 (jours ouvrés)</li>
+                            <li>Exemple : 2 fois par semaine = 0.4 fois par jour</li>
+                        </ul>
+                        <div class="flex items-center">
+                            <input type="number" 
+                                id="frequency" 
+                                class="zen-input flex-grow rounded-lg p-3 focus:outline-none" 
+                                placeholder="Ex: 0.4"
+                                step="0.1"
+                                title="Fréquence moyenne par jour ouvré. Utilisez des décimales pour les tâches hebdomadaires ou mensuelles">
+                            <span class="ml-3 text-gray-500">fois par jour</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <label class="block text-lg font-medium text-zen-dark">Temps de développement estimé</label>
+                        <p class="text-sm text-gray-500">Le temps total que vous pensez nécessaire pour :</p>
+                        <ul class="list-disc list-inside text-sm text-gray-500 pl-4 space-y-1">
+                            <li>Apprendre les outils nécessaires</li>
+                            <li>Développer la solution</li>
+                            <li>Tester et déboguer</li>
+                            <li>Documenter et maintenir</li>
+                        </ul>
+                        <div class="flex items-center">
+                            <input type="number" 
+                                id="automationTime" 
+                                class="zen-input flex-grow rounded-lg p-3 focus:outline-none" 
+                                placeholder="Ex: 4"
+                                title="Incluez tout le temps nécessaire : apprentissage, développement, tests et documentation">
+                            <span class="ml-3 text-gray-500">heures</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="calculate()" class="zen-button w-full py-4 rounded-lg text-xl font-medium text-white shadow-lg">
+                        Calculer la rentabilité
+                    </button>
+                    
+                    <div id="result" class="hidden mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200">
+                        <h2 class="text-2xl font-bold mb-4 gradient-text">Résultat</h2>
+                        <p id="resultText" class="text-lg"></p>
+                        <div id="breakEvenDate" class="mt-4 text-lg"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-8 px-4 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 Calculateur d'Automatisation</p>
+            <p class="mt-2">Conçu pour vous aider à prendre des décisions éclairées sur l'automatisation de vos tâches.</p>
+        </footer>
+    </div>
+</body>
+</html>
